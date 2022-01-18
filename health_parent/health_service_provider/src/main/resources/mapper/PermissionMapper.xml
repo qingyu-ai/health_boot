@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qy.mapper.PermissionMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.qy.pojo.Permission">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="keyword" property="keyword" />
+        <result column="description" property="description" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, name, keyword, description
+    </sql>
+
+    <!--通过角色id查询权限-->
+    <select id="findByRoleId"
+            parameterType="int"
+            resultType="com.qy.pojo.Permission">
+        select  p.*
+      		from t_permission p ,t_role_permission rp
+      		where p.id = rp.permission_id and rp.role_id = #{roleId}
+    </select>
+
+</mapper>

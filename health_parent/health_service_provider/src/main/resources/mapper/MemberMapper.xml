@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qy.mapper.MemberMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.qy.pojo.Member">
+        <id column="id" property="id" />
+        <result column="fileNumber" property="fileNumber" />
+        <result column="name" property="name" />
+        <result column="sex" property="sex" />
+        <result column="idCard" property="idCard" />
+        <result column="phoneNumber" property="phoneNumber" />
+        <result column="regTime" property="regTime" />
+        <result column="password" property="password" />
+        <result column="email" property="email" />
+        <result column="birthday" property="birthday" />
+        <result column="remark" property="remark" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, fileNumber, name, sex, idCard, phoneNumber, regTime, password, email, birthday, remark
+    </sql>
+
+    <!--根据日期统计会员数，统计指定日期之前的会员数-->
+    <select id="findMemberCountBeforeDate" parameterType="string" resultType="int">
+        select count(id) from t_member where regTime &lt;= STR_TO_DATE(#{value},"%Y-%m-%d")
+    </select>
+
+    <!--根据日期统计会员数-->
+    <select id="findMemberCountByDate" parameterType="string" resultType="int">
+        select count(id) from t_member where regTime = STR_TO_DATE(#{value},"%Y-%m-%d")
+    </select>
+
+    <!--根据日期统计会员数，统计指定日期之后的会员数-->
+    <select id="findMemberCountAfterDate" parameterType="string" resultType="int">
+        select count(id) from t_member where regTime &gt;= STR_TO_DATE(#{value},"%Y-%m-%d")
+    </select>
+
+    <!--总会员数-->
+    <select id="findMemberTotalCount" resultType="int">
+        select count(id) from t_member
+    </select>
+
+</mapper>
