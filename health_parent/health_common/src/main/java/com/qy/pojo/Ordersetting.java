@@ -26,6 +26,7 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
+@NoArgsConstructor
 @TableName("t_ordersetting")
 @ApiModel(value="Ordersetting对象", description="")
 public class Ordersetting implements Serializable {
